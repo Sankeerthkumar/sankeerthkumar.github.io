@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sankeerth Kumar Eswaravaka — Senior Java Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #0a0a0f;
+  --bg2: #0f0f18;
+  --bg3: #13131e;
+  --card: #14141f;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.12);
+  --accent: #4f8ef7;
+  --accent2: #7c6af5;
+  --accent3: #3dd8a0;
+  --text: #f0f0f8;
+  --text2: #8888a8;
+  --text3: #5555778;
+  --font-head: 'Syne', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 16px; line-height: 1.7; overflow-x: hidden; }
+
+/* NOISE OVERLAY */
+body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; opacity: 0.4; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 5%; display: flex; align-items: center; justify-content: space-between; height: 64px; background: rgba(10,10,15,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+.nav-logo { font-family: var(--font-head); font-weight: 800; font-size: 18px; color: var(--text); letter-spacing: -0.5px; }
+.nav-logo span { color: var(--accent); }
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a { color: var(--text2); text-decoration: none; font-size: 14px; font-weight: 400; transition: color 0.2s; }
+.nav-links a:hover { color: var(--text); }
+.nav-cta { background: var(--accent); color: white; padding: 8px 20px; border-radius: 6px; font-size: 14px; font-weight: 500; text-decoration: none; transition: opacity 0.2s; }
+.nav-cta:hover { opacity: 0.85; }
+
+/* HERO */
+.hero { min-height: 100vh; display: flex; align-items: center; padding: 100px 5% 60px; position: relative; overflow: hidden; }
+.hero-glow { position: absolute; top: -200px; left: -100px; width: 700px; height: 700px; background: radial-gradient(circle, rgba(79,142,247,0.12) 0%, transparent 70%); pointer-events: none; }
+.hero-glow2 { position: absolute; bottom: -100px; right: -50px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(124,106,245,0.1) 0%, transparent 70%); pointer-events: none; }
+.hero-inner { max-width: 1100px; width: 100%; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.hero-tag { display: inline-flex; align-items: center; gap: 8px; background: rgba(79,142,247,0.1); border: 1px solid rgba(79,142,247,0.25); border-radius: 20px; padding: 5px 14px; font-size: 12px; font-family: var(--font-mono); color: var(--accent); margin-bottom: 24px; }
+.hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent3); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
+.hero h1 { font-family: var(--font-head); font-size: clamp(38px, 5vw, 62px); font-weight: 800; line-height: 1.05; letter-spacing: -2px; margin-bottom: 20px; }
+.hero h1 .line2 { color: var(--accent); }
+.hero-sub { font-size: 17px; color: var(--text2); line-height: 1.7; margin-bottom: 32px; max-width: 480px; font-weight: 300; }
+.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-primary { background: var(--accent); color: white; padding: 12px 28px; border-radius: 8px; font-size: 15px; font-weight: 500; text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+.btn-primary:hover { background: #3a7ae0; transform: translateY(-1px); }
+.btn-secondary { background: transparent; color: var(--text); padding: 12px 28px; border-radius: 8px; font-size: 15px; font-weight: 500; text-decoration: none; border: 1px solid var(--border2); transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+.btn-secondary:hover { background: var(--bg3); border-color: rgba(255,255,255,0.2); }
+.hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-top: 40px; }
+.hero-stat { background: var(--card); padding: 20px; text-align: center; }
+.hero-stat-num { font-family: var(--font-head); font-size: 28px; font-weight: 800; color: var(--accent); }
+.hero-stat-lbl { font-size: 12px; color: var(--text2); margin-top: 2px; }
+.hero-right { position: relative; }
+.code-card { background: var(--bg3); border: 1px solid var(--border2); border-radius: 12px; padding: 24px; font-family: var(--font-mono); font-size: 13px; line-height: 2; position: relative; overflow: hidden; }
+.code-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 36px; background: var(--card); border-bottom: 1px solid var(--border); display: flex; align-items: center; }
+.code-dots { position: absolute; top: 11px; left: 14px; display: flex; gap: 6px; z-index: 1; }
+.code-dots span { width: 12px; height: 12px; border-radius: 50%; }
+.code-dots span:nth-child(1){background:#ff5f56} .code-dots span:nth-child(2){background:#ffbd2e} .code-dots span:nth-child(3){background:#27c93f}
+.code-body { margin-top: 28px; }
+.c-kw { color: #c792ea; } .c-fn { color: #82aaff; } .c-str { color: #c3e88d; } .c-ann { color: #ffcb6b; } .c-cm { color: #546e7a; } .c-cls { color: var(--accent3); }
+.floating-badge { position: absolute; background: var(--card); border: 1px solid var(--border2); border-radius: 10px; padding: 10px 16px; font-size: 12px; font-weight: 500; display: flex; align-items: center; gap: 8px; box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
+.fb1 { top: -20px; right: -20px; color: var(--accent3); animation: float 3s ease-in-out infinite; }
+.fb2 { bottom: 20px; left: -30px; color: var(--accent); animation: float 3s ease-in-out infinite 1.5s; }
+.fb-dot { width: 8px; height: 8px; border-radius: 50%; }
+.fb1 .fb-dot { background: var(--accent3); }
+.fb2 .fb-dot { background: var(--accent); }
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+
+/* SECTIONS */
+section { padding: 100px 5%; position: relative; }
+.section-inner { max-width: 1100px; margin: 0 auto; }
+.section-label { font-family: var(--font-mono); font-size: 12px; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 12px; }
+.section-title { font-family: var(--font-head); font-size: clamp(28px, 4vw, 44px); font-weight: 800; letter-spacing: -1.5px; margin-bottom: 16px; line-height: 1.1; }
+.section-sub { font-size: 16px; color: var(--text2); max-width: 560px; line-height: 1.7; margin-bottom: 60px; font-weight: 300; }
+
+/* SKILLS */
+#skills { background: var(--bg2); }
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+.skill-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; transition: border-color 0.2s, transform 0.2s; }
+.skill-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+.skill-card-icon { font-size: 24px; margin-bottom: 12px; }
+.skill-card-title { font-family: var(--font-head); font-size: 15px; font-weight: 700; margin-bottom: 12px; color: var(--text); }
+.skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.skill-tag { font-size: 12px; padding: 3px 10px; border-radius: 4px; background: rgba(79,142,247,0.08); border: 1px solid rgba(79,142,247,0.15); color: var(--accent); font-family: var(--font-mono); }
+.skill-tag.green { background: rgba(61,216,160,0.08); border-color: rgba(61,216,160,0.15); color: var(--accent3); }
+.skill-tag.purple { background: rgba(124,106,245,0.08); border-color: rgba(124,106,245,0.2); color: #a89cf7; }
+
+/* EXPERIENCE */
+.exp-timeline { position: relative; padding-left: 32px; }
+.exp-timeline::before { content: ''; position: absolute; left: 0; top: 8px; bottom: 8px; width: 1px; background: linear-gradient(to bottom, var(--accent), var(--accent2), transparent); }
+.exp-item { position: relative; margin-bottom: 48px; }
+.exp-dot { position: absolute; left: -38px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); box-shadow: 0 0 0 3px rgba(79,142,247,0.2); }
+.exp-dot.green { background: var(--accent3); box-shadow: 0 0 0 3px rgba(61,216,160,0.2); }
+.exp-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 4px; flex-wrap: wrap; }
+.exp-company { font-family: var(--font-head); font-size: 20px; font-weight: 700; color: var(--text); }
+.exp-period { font-family: var(--font-mono); font-size: 12px; color: var(--accent); background: rgba(79,142,247,0.08); border: 1px solid rgba(79,142,247,0.2); padding: 3px 10px; border-radius: 4px; white-space: nowrap; }
+.exp-role { font-size: 14px; color: var(--text2); margin-bottom: 4px; }
+.exp-client { font-size: 13px; color: var(--accent3); font-family: var(--font-mono); margin-bottom: 16px; }
+.exp-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; }
+.exp-bullets { list-style: none; }
+.exp-bullets li { font-size: 14px; color: var(--text2); line-height: 1.7; padding: 5px 0; padding-left: 18px; position: relative; }
+.exp-bullets li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); font-size: 11px; top: 7px; }
+.exp-stack { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); }
+.exp-tag { font-size: 11px; padding: 2px 8px; border-radius: 4px; background: var(--bg2); border: 1px solid var(--border2); color: var(--text2); font-family: var(--font-mono); }
+
+/* PROJECTS */
+#projects { background: var(--bg2); }
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+.project-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 28px; transition: all 0.25s; position: relative; overflow: hidden; }
+.project-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(to right, var(--accent), var(--accent2)); opacity: 0; transition: opacity 0.2s; }
+.project-card:hover { border-color: var(--border2); transform: translateY(-3px); }
+.project-card:hover::before { opacity: 1; }
+.project-badge { display: inline-block; font-size: 11px; padding: 3px 10px; border-radius: 4px; margin-bottom: 16px; font-family: var(--font-mono); }
+.badge-fintech { background: rgba(79,142,247,0.1); color: var(--accent); border: 1px solid rgba(79,142,247,0.2); }
+.badge-banking { background: rgba(61,216,160,0.1); color: var(--accent3); border: 1px solid rgba(61,216,160,0.2); }
+.badge-backend { background: rgba(124,106,245,0.1); color: #a89cf7; border: 1px solid rgba(124,106,245,0.2); }
+.project-title { font-family: var(--font-head); font-size: 18px; font-weight: 700; margin-bottom: 10px; color: var(--text); line-height: 1.3; }
+.project-desc { font-size: 14px; color: var(--text2); line-height: 1.7; margin-bottom: 16px; }
+.project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.project-tag { font-size: 11px; padding: 3px 8px; border-radius: 4px; background: var(--bg2); color: var(--text2); font-family: var(--font-mono); border: 1px solid var(--border); }
+
+/* CERTIFICATIONS */
+.certs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.cert-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; display: flex; align-items: flex-start; gap: 16px; transition: all 0.2s; }
+.cert-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+.cert-icon { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+.cert-icon.aws { background: rgba(255,153,0,0.12); }
+.cert-icon.hashi { background: rgba(124,106,245,0.12); }
+.cert-icon.oracle { background: rgba(255,0,0,0.08); }
+.cert-body {}
+.cert-title { font-size: 14px; font-weight: 500; color: var(--text); line-height: 1.4; margin-bottom: 4px; }
+.cert-issuer { font-size: 12px; color: var(--text2); font-family: var(--font-mono); }
+.cert-badge { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 3px; background: rgba(61,216,160,0.1); color: var(--accent3); border: 1px solid rgba(61,216,160,0.2); margin-top: 6px; font-family: var(--font-mono); }
+
+/* CONTACT */
+#contact { background: var(--bg2); }
+.contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+.contact-info { }
+.contact-item { display: flex; align-items: center; gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--border); }
+.contact-item:last-child { border-bottom: none; }
+.contact-icon { width: 40px; height: 40px; border-radius: 8px; background: rgba(79,142,247,0.1); border: 1px solid rgba(79,142,247,0.2); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+.contact-label { font-size: 12px; color: var(--text2); font-family: var(--font-mono); margin-bottom: 2px; }
+.contact-value { font-size: 15px; color: var(--text); font-weight: 400; }
+.contact-value a { color: var(--accent); text-decoration: none; }
+.contact-value a:hover { text-decoration: underline; }
+.contact-cta { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 32px; }
+.contact-cta h3 { font-family: var(--font-head); font-size: 22px; font-weight: 700; margin-bottom: 12px; }
+.contact-cta p { font-size: 14px; color: var(--text2); line-height: 1.7; margin-bottom: 24px; }
+.contact-cta a { display: block; text-align: center; }
+.status-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(61,216,160,0.08); border: 1px solid rgba(61,216,160,0.2); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: var(--accent3); margin-bottom: 24px; }
+.status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent3); animation: pulse 2s infinite; }
+
+/* FOOTER */
+footer { padding: 32px 5%; border-top: 1px solid var(--border); text-align: center; }
+.footer-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: gap; gap: 16px; }
+.footer-logo { font-family: var(--font-head); font-size: 16px; font-weight: 800; color: var(--text2); }
+.footer-logo span { color: var(--accent); }
+.footer-text { font-size: 13px; color: var(--text2); }
+.footer-links { display: flex; gap: 20px; }
+.footer-links a { font-size: 13px; color: var(--text2); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--text); }
+
+/* ANIMATIONS */
+.fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-track { background: var(--bg); } ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+  .hero-right { display: none; }
+  .contact-inner { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .hero h1 { font-size: 36px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">SK<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#certifications">Certs</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="/cdn-cgi/l/email-protection#5122303f3a343423253934222630233027303a3011363c30383d7f323e3c" class="nav-cta">Hire Me</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="about">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-tag">Available for remote roles</div>
+      <h1>Sankeerth<br><span class="line2">Kumar.</span></h1>
+      <p class="hero-sub">Senior Java Developer with 7+ years building enterprise-grade microservices, REST APIs, and financial systems in banking and fintech — on AWS, Spring Boot, and Kafka.</p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-primary">Get In Touch ↗</a>
+        <a href="#experience" class="btn-secondary">View Experience</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="hero-stat-num">7+</div><div class="hero-stat-lbl">Years Exp.</div></div>
+        <div class="hero-stat"><div class="hero-stat-num">4</div><div class="hero-stat-lbl">Certifications</div></div>
+        <div class="hero-stat"><div class="hero-stat-num">90%+</div><div class="hero-stat-lbl">Test Coverage</div></div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="floating-badge fb1"><span class="fb-dot"></span>Currently at Mindgraph</div>
+      <div class="code-card">
+        <div class="code-dots"><span></span><span></span><span></span></div>
+        <div class="code-body">
+<span class="c-ann">@RestController</span><br>
+<span class="c-ann">@RequestMapping</span>(<span class="c-str">"/api/payments"</span>)<br>
+<span class="c-kw">public class</span> <span class="c-cls">PaymentController</span> {<br>
+<br>
+&nbsp;&nbsp;<span class="c-ann">@Autowired</span><br>
+&nbsp;&nbsp;<span class="c-kw">private</span> <span class="c-cls">PaymentService</span> service;<br>
+<br>
+&nbsp;&nbsp;<span class="c-ann">@PostMapping</span>(<span class="c-str">"/process"</span>)<br>
+&nbsp;&nbsp;<span class="c-kw">public</span> <span class="c-cls">ResponseEntity</span>&lt;<span class="c-cls">Payment</span>&gt;<br>
+&nbsp;&nbsp;<span class="c-fn">processPayment</span>(<span class="c-ann">@RequestBody</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-cls">PaymentRequest</span> req) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-kw">return</span> <span class="c-cls">ResponseEntity</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.ok(service.<span class="c-fn">process</span>(req));<br>
+&nbsp;&nbsp;}<br>
+}
+        </div>
+      </div>
+      <div class="floating-badge fb2"><span class="fb-dot"></span>Frisco, TX — Remote OK</div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-label fade-up">Technical Expertise</div>
+    <h2 class="section-title fade-up">Core Skills</h2>
+    <p class="section-sub fade-up">Full-stack Java engineering with deep expertise in microservices, cloud, and financial systems.</p>
+    <div class="skills-grid">
+      <div class="skill-card fade-up">
+        <div class="skill-card-icon">☕</div>
+        <div class="skill-card-title">Core Java & Frameworks</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Java 17/11/8</span>
+          <span class="skill-tag">Core Java</span>
+          <span class="skill-tag">J2EE</span>
+          <span class="skill-tag">Spring Boot</span>
+          <span class="skill-tag">Spring MVC</span>
+          <span class="skill-tag">Spring Batch</span>
+          <span class="skill-tag">Hibernate/JPA</span>
+          <span class="skill-tag">Spring Security</span>
+        </div>
+      </div>
+      <div class="skill-card fade-up">
+        <div class="skill-card-icon">🔌</div>
+        <div class="skill-card-title">APIs & Microservices</div>
+        <div class="skill-tags">
+          <span class="skill-tag">REST APIs</span>
+          <span class="skill-tag">SOAP</span>
+          <span class="skill-tag">GraphQL</span>
+          <span class="skill-tag">Microservices</span>
+          <span class="skill-tag">Swagger/OpenAPI</span>
+          <span class="skill-tag">JWT</span>
+          <span class="skill-tag">OAuth 2.0</span>
+        </div>
+      </div>
+      <div class="skill-card fade-up">
+        <div class="skill-card-icon">☁️</div>
+        <div class="skill-card-title">Cloud & DevOps</div>
+        <div class="skill-tags">
+          <span class="skill-tag green">AWS EC2/ECS/EKS</span>
+          <span class="skill-tag green">RDS / Lambda</span>
+          <span class="skill-tag green">CloudWatch</span>
+          <span class="skill-tag green">Docker</span>
+          <span class="skill-tag green">Kubernetes</span>
+          <span class="skill-tag green">Jenkins</span>
+          <span class="skill-tag green">Terraform</span>
+        </div>
+      </div>
+      <div class="skill-card fade-up">
+        <div class="skill-card-icon">🗄️</div>
+        <div class="skill-card-title">Databases</div>
+        <div class="skill-tags">
+          <span class="skill-tag">PostgreSQL</span>
+          <span class="skill-tag">Oracle DB</span>
+          <span class="skill-tag">MySQL</span>
+          <span class="skill-tag purple">MongoDB</span>
+          <span class="skill-tag purple">Redis</span>
+        </div>
+      </div>
+      <div class="skill-card fade-up">
+        <div class="skill-card-icon">📨</div>
+        <div class="skill-card-title">Messaging & Streaming</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Apache Kafka</span>
+          <span class="skill-tag">Event-Driven</span>
+          <span class="skill-tag">Producers/Consumers</span>
+          <span class="skill-tag">Consumer Groups</span>
+          <span class="skill-tag">Real-time Processing</span>
+        </div>
+      </div>
+      <div class="skill-card fade-up">
+        <div class="skill-card-icon">🧪</div>
+        <div class="skill-card-title">Testing & Quality</div>
+        <div class="skill-tags">
+          <span class="skill-tag green">JUnit</span>
+          <span class="skill-tag green">Mockito</span>
+          <span class="skill-tag green">REST Assured</span>
+          <span class="skill-tag green">TDD</span>
+          <span class="skill-tag green">90%+ Coverage</span>
+          <span class="skill-tag green">SonarQube</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <div class="section-label fade-up">Career</div>
+    <h2 class="section-title fade-up">Experience</h2>
+    <p class="section-sub fade-up">7+ years delivering production Java systems in fintech and banking across the USA and India.</p>
+    <div class="exp-timeline">
+
+      <div class="exp-item fade-up">
+        <div class="exp-dot green"></div>
+        <div class="exp-header">
+          <div>
+            <div class="exp-company">Mindgraph</div>
+            <div class="exp-role">Senior Java Developer — USA</div>
+            <div class="exp-client">▸ Client: DXC Solutions (Luxoft)</div>
+          </div>
+          <div class="exp-period">Jan 2025 — Present</div>
+        </div>
+        <div class="exp-card">
+          <ul class="exp-bullets">
+            <li>Designed and built Spring Boot microservices for high-volume financial transaction and document processing workflows, defining REST API contracts via Swagger/OpenAPI.</li>
+            <li>Implemented RESTful APIs connecting back-end financial data systems to multiple downstream service endpoints; integrated with third-party financial services for real-time data exchange.</li>
+            <li>Applied Hibernate/JPA and Spring Data for ORM-based access on PostgreSQL; selected MongoDB for unstructured document storage based on access pattern requirements.</li>
+            <li>Used Apache Kafka for event-driven processing — designed producers and consumers decoupling payment and document workflows for reliability and scalability.</li>
+            <li>Maintained 90%+ unit test coverage using JUnit and Mockito with TDD; conducted code reviews and enforced quality standards across the team.</li>
+            <li>Deployed containerized microservices on AWS (EC2, ECS, RDS, Lambda, CloudWatch) via Jenkins CI/CD pipelines ensuring zero-downtime releases.</li>
+            <li>Active Agile/Scrum contributor — sprint planning, stand-ups, backlog refinement, and cross-functional collaboration with QA, DevOps, and Product teams.</li>
+          </ul>
+          <div class="exp-stack">
+            <span class="exp-tag">Java 17</span><span class="exp-tag">Spring Boot</span><span class="exp-tag">Hibernate/JPA</span><span class="exp-tag">Kafka</span><span class="exp-tag">PostgreSQL</span><span class="exp-tag">MongoDB</span><span class="exp-tag">AWS</span><span class="exp-tag">Docker</span><span class="exp-tag">Kubernetes</span><span class="exp-tag">Jenkins</span><span class="exp-tag">React.js</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item fade-up">
+        <div class="exp-dot"></div>
+        <div class="exp-header">
+          <div>
+            <div class="exp-company">Infosys</div>
+            <div class="exp-role">Software Engineer — Finacle Banking & Payments</div>
+            <div class="exp-client">▸ Client: First Bank (Core Banking)</div>
+          </div>
+          <div class="exp-period">May 2022 — Aug 2023</div>
+        </div>
+        <div class="exp-card">
+          <ul class="exp-bullets">
+            <li>Developed enterprise Java applications for ACH, RTGS, and cross-border payment workflows using Core Java, J2EE, Spring Boot, integrating Finacle core banking APIs via REST and SOAP.</li>
+            <li>Applied Hibernate/JPA for ORM-based data access on Oracle DB and PostgreSQL; used Redis as a caching layer reducing high-frequency API response times significantly.</li>
+            <li>Achieved 90%+ automated test coverage using JUnit and Mockito with TDD — reducing post-deployment rollback rates for critical payment services.</li>
+            <li>Optimized Spring Batch jobs and Kafka event pipelines — improved payment throughput by 25–30% and reduced overnight batch processing windows.</li>
+            <li>Secured all payment endpoints with Spring Security, JWT authentication, OAuth 2.0, and role-based access controls.</li>
+            <li>Worked in Agile/Scrum — sprint planning, stand-ups, backlog grooming, and retrospectives in a cross-functional fintech team.</li>
+          </ul>
+          <div class="exp-stack">
+            <span class="exp-tag">Java 11</span><span class="exp-tag">Spring Boot</span><span class="exp-tag">Spring Batch</span><span class="exp-tag">Hibernate/JPA</span><span class="exp-tag">Oracle DB</span><span class="exp-tag">PostgreSQL</span><span class="exp-tag">Redis</span><span class="exp-tag">Kafka</span><span class="exp-tag">JWT</span><span class="exp-tag">OAuth 2.0</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item fade-up">
+        <div class="exp-dot"></div>
+        <div class="exp-header">
+          <div>
+            <div class="exp-company">Sri Tech</div>
+            <div class="exp-role">Associate Software Engineer</div>
+            <div class="exp-client">▸ Legacy Modernization & Reporting Systems</div>
+          </div>
+          <div class="exp-period">Jun 2019 — Apr 2022</div>
+        </div>
+        <div class="exp-card">
+          <ul class="exp-bullets">
+            <li>Modernized legacy Struts/JSP monoliths into modular Spring Boot microservices applying OOP principles and design patterns for improved scalability.</li>
+            <li>Built REST APIs for data aggregation and reporting; applied Hibernate/JPA to replace raw JDBC with a clean ORM-based data layer.</li>
+            <li>Optimized MySQL schemas, indexes, and stored procedures — reduced SQL query execution times by ~40% for large-scale workloads.</li>
+            <li>Developed React.js dashboards backed by Spring Boot APIs — reduced manual reporting effort by ~50% for internal business teams.</li>
+            <li>Maintained Jenkins CI/CD pipelines and collaborated with QA and DevOps teams across Agile release cycles.</li>
+          </ul>
+          <div class="exp-stack">
+            <span class="exp-tag">Java</span><span class="exp-tag">Spring Boot</span><span class="exp-tag">Hibernate/JPA</span><span class="exp-tag">MySQL</span><span class="exp-tag">React.js</span><span class="exp-tag">Jenkins</span><span class="exp-tag">Docker</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="section-label fade-up">Portfolio</div>
+    <h2 class="section-title fade-up">Featured Projects</h2>
+    <p class="section-sub fade-up">Enterprise-grade systems built for real-world financial and business applications.</p>
+    <div class="projects-grid">
+      <div class="project-card fade-up">
+        <span class="project-badge badge-fintech">FinTech</span>
+        <div class="project-title">FinTech Document Automation Platform</div>
+        <div class="project-desc">End-to-end payment workflow microservices with intelligent document processing. REST APIs connecting financial back-end systems to multiple downstream endpoints. Processes millions of transactions with 99.9% uptime.</div>
+        <div class="project-tags"><span class="project-tag">Java 17</span><span class="project-tag">Spring Boot</span><span class="project-tag">Kafka</span><span class="project-tag">PostgreSQL</span><span class="project-tag">AWS ECS</span><span class="project-tag">Docker</span></div>
+      </div>
+      <div class="project-card fade-up">
+        <span class="project-badge badge-banking">Banking</span>
+        <div class="project-title">Core Banking Payment Processing System</div>
+        <div class="project-desc">Enterprise ACH, RTGS, and cross-border payment modules for First Bank on Finacle. High-throughput Kafka messaging pipelines processing millions of concurrent payment events. Improved throughput by 25–30%.</div>
+        <div class="project-tags"><span class="project-tag">Java 11</span><span class="project-tag">Spring Batch</span><span class="project-tag">Oracle DB</span><span class="project-tag">Kafka</span><span class="project-tag">JWT</span><span class="project-tag">Redis</span></div>
+      </div>
+      <div class="project-card fade-up">
+        <span class="project-badge badge-backend">Microservices</span>
+        <div class="project-title">Microservices E-Commerce Backend</div>
+        <div class="project-desc">Distributed e-commerce backend with separate services for orders, inventory, and payments using Spring Boot. Kafka-powered async order processing and event-driven notifications. 85%+ test coverage.</div>
+        <div class="project-tags"><span class="project-tag">Java</span><span class="project-tag">Spring Boot</span><span class="project-tag">Kafka</span><span class="project-tag">MySQL</span><span class="project-tag">Docker</span><span class="project-tag">JUnit</span></div>
+      </div>
+      <div class="project-card fade-up">
+        <span class="project-badge badge-fintech">LLM Integration</span>
+        <div class="project-title">LLM-Powered Document Q&A System</div>
+        <div class="project-desc">RAG-based document retrieval system using Spring Boot REST APIs as the backend layer. Integrates with PostgreSQL for metadata storage and Redis for response caching. Deployed on AWS EC2.</div>
+        <div class="project-tags"><span class="project-tag">Java</span><span class="project-tag">Spring Boot</span><span class="project-tag">PostgreSQL</span><span class="project-tag">Redis</span><span class="project-tag">AWS EC2</span><span class="project-tag">REST APIs</span></div>
+      </div>
+      <div class="project-card fade-up">
+        <span class="project-badge badge-backend">Modernization</span>
+        <div class="project-title">Legacy Application Modernization</div>
+        <div class="project-desc">Migrated monolithic Struts/JSP applications to modular Spring Boot microservices using strangler-fig pattern. Optimized MySQL queries reducing processing time by ~40%. React.js frontend replacing legacy JSP views.</div>
+        <div class="project-tags"><span class="project-tag">Java</span><span class="project-tag">Spring Boot</span><span class="project-tag">Hibernate</span><span class="project-tag">MySQL</span><span class="project-tag">React.js</span><span class="project-tag">Jenkins</span></div>
+      </div>
+      <div class="project-card fade-up">
+        <span class="project-badge badge-banking">Reporting</span>
+        <div class="project-title">Internal Reporting & Dashboard System</div>
+        <div class="project-desc">Backend REST APIs for data aggregation and automated report generation consolidating data from multiple sources. React.js dashboards reduced manual reporting effort by ~50% for business teams.</div>
+        <div class="project-tags"><span class="project-tag">Java</span><span class="project-tag">Spring Boot</span><span class="project-tag">MySQL</span><span class="project-tag">React.js</span><span class="project-tag">REST APIs</span><span class="project-tag">Jenkins</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-inner">
+    <div class="section-label fade-up">Credentials</div>
+    <h2 class="section-title fade-up">Certifications</h2>
+    <p class="section-sub fade-up">Industry-recognized certifications validating cloud, Java, and infrastructure expertise.</p>
+    <div class="certs-grid">
+      <div class="cert-card fade-up">
+        <div class="cert-icon aws">☁️</div>
+        <div class="cert-body">
+          <div class="cert-title">AWS Certified Solutions Architect</div>
+          <div class="cert-issuer">Amazon Web Services</div>
+          <span class="cert-badge">Associate</span>
+        </div>
+      </div>
+      <div class="cert-card fade-up">
+        <div class="cert-icon aws">⚡</div>
+        <div class="cert-body">
+          <div class="cert-title">AWS Certified Developer</div>
+          <div class="cert-issuer">Amazon Web Services</div>
+          <span class="cert-badge">Associate</span>
+        </div>
+      </div>
+      <div class="cert-card fade-up">
+        <div class="cert-icon oracle">☕</div>
+        <div class="cert-body">
+          <div class="cert-title">Oracle Java SE 11 Developer</div>
+          <div class="cert-issuer">Oracle Corporation</div>
+          <span class="cert-badge">Professional</span>
+        </div>
+      </div>
+      <div class="cert-card fade-up">
+        <div class="cert-icon hashi">🔧</div>
+        <div class="cert-body">
+          <div class="cert-title">HashiCorp Certified Terraform Associate</div>
+          <div class="cert-issuer">HashiCorp</div>
+          <span class="cert-badge">Associate</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education" style="background:var(--bg2)">
+  <div class="section-inner">
+    <div class="section-label fade-up">Academic</div>
+    <h2 class="section-title fade-up">Education</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">
+      <div class="cert-card fade-up">
+        <div class="cert-icon" style="background:rgba(79,142,247,0.1);font-size:22px">🎓</div>
+        <div class="cert-body">
+          <div class="cert-title">Master of Science — Computer and Information Science</div>
+          <div class="cert-issuer">Webster University, USA</div>
+          <span class="cert-badge">Aug 2023 – May 2025</span>
+        </div>
+      </div>
+      <div class="cert-card fade-up">
+        <div class="cert-icon" style="background:rgba(61,216,160,0.1);font-size:22px">🎓</div>
+        <div class="cert-body">
+          <div class="cert-title">Bachelor of Technology — Mechanical Engineering</div>
+          <div class="cert-issuer">Vel Tech / Anna University, India</div>
+          <span class="cert-badge">Jun 2017 – Feb 2020</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-label fade-up">Let's Connect</div>
+    <h2 class="section-title fade-up">Get In Touch</h2>
+    <p class="section-sub fade-up">Open to remote Java Developer roles in fintech, banking, and enterprise software. Available immediately.</p>
+    <div class="contact-inner">
+      <div class="contact-info fade-up">
+        <div class="contact-item">
+          <div class="contact-icon">📧</div>
+          <div><div class="contact-label">Email</div><div class="contact-value"><a href="/cdn-cgi/l/email-protection#0a796b64616f6f787e626f797d6b786b7c6b616b4a6d676b636624696567"><span class="__cf_email__" data-cfemail="8af9ebe4e1efeff8fee2eff9fdebf8ebfcebe1ebcaede7ebe3e6a4e9e5e7">[email&#160;protected]</span></a></div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📱</div>
+          <div><div class="contact-label">Phone</div><div class="contact-value"><a href="tel:+16693763177">+1 (669) 609-7472</a></div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div><div class="contact-label">Location</div><div class="contact-value">Frisco, TX — Remote OK</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">💼</div>
+          <div><div class="contact-label">LinkedIn</div><div class="contact-value"><a href="https://www.linkedin.com/in/sankeerthkumar-eswaravaka-a84a89288" target="_blank">linkedin.com/in/sankeerthkumar</a></div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🐙</div>
+          <div><div class="contact-label">Portfolio</div><div class="contact-value"><a href="https://sankeerthkumar.github.io" target="_blank">sankeerthkumar.github.io</a></div></div>
+        </div>
+      </div>
+      <div class="contact-cta fade-up">
+        <div class="status-badge"><span class="status-dot"></span>Available for new opportunities</div>
+        <h3>Ready to contribute from day one</h3>
+        <p>7+ years of Java, Spring Boot, and financial systems experience. GC/EAD — no sponsorship required. Can join within 1 week.</p>
+        <a href="/cdn-cgi/l/email-protection#e291838c89878790968a87919583908394838983a2858f838b8ecc818d8f" class="btn-primary">Send Me an Email ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">SK<span>.</span></div>
+    <div class="footer-text">© 2025 Sankeerth Kumar Eswaravaka — Senior Java Developer</div>
+    <div class="footer-links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/ema
